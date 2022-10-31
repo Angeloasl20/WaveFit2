@@ -1,0 +1,365 @@
+﻿<Window x:Class="Teste.Views.LoginWindowView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Teste.Views"
+        mc:Ignorable="d"
+        Title="ShellView" Height="200" Width="300" WindowStartupLocation="CenterScreen">
+
+    <Window.Resources>
+        <Style TargetType="{x:Type Button}" x:Key="ButtonStyle">
+            <Setter Property="Height" Value="25"/>
+            <Setter Property="Width" Value="100"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+                        <Border CornerRadius="5" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="BorderBrush" Value="#FF909090"/>
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Background" Value="#FFD3E7DB"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <!--TEXTBOX-->
+        <Style TargetType="{x:Type TextBox}" x:Key="TextBoxStyle">
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="Margin" Value="0,5,10,0"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="TextWrapping" Value="Wrap"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="IsEnabled" Value="{Binding IsEditEnabled}"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBoxBase}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="5" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF909090"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--PASSWORDBOX-->
+        <Style TargetType="{x:Type PasswordBox}" x:Key="PasswordBoxStyle">
+            <Setter Property="Height" Value="22"/>
+            <Setter Property="Margin" Value="0,0,10,5"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Black"/>
+            <Setter Property="IsEnabled" Value="{Binding IsPasswordEditEnabled}"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type PasswordBox}">
+                        <Border x:Name="Bd" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="5" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="#FF909090"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--TEXTBLOCK-->
+        <Style TargetType="{x:Type TextBlock}" x:Key="TextBlockStyle">
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10,0,10,0"/>
+            <Setter Property="FontFamily" Value="Calibri"/>
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="FontWeight" Value="Normal"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="SnapsToDevicePixels" Value="True"/>
+        </Style>
+
+        <!--PACIENTE-->
+        <Style x:Key="PatientIcon" TargetType="{x:Type ContentControl}">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Viewbox Stretch="Uniform">
+                            <Canvas Width="982.90373" Height="988.00001">
+                                <Canvas.RenderTransform>
+                                    <TranslateTransform X="0" Y="0"/>
+                                </Canvas.RenderTransform>
+                                <Canvas>
+                                    <Canvas.RenderTransform>
+                                        <TranslateTransform X="-6707.9617" Y="-13239"/>
+                                    </Canvas.RenderTransform>
+                                    <Canvas>
+                                        <Path StrokeThickness="50">
+                                            <Path.Data>
+                                                <PathGeometry Figures="m 7478 13647 c 0 -181 -77 -383 -282 -383 -205 0 -279 210 -279 383 0 161 124 420 281 420 168 0 280 -274 280 -420 z" FillRule="evenodd"/>
+                                            </Path.Data>
+                                        </Path>
+                                        <Path StrokeThickness="50" >
+                                            <Path.Data>
+                                                <PathGeometry Figures="m 7080 14018 c -123 18 -221 60 -319 115 -47 26 -31 69 19 69 280 0 565 0 846 0 32 0 59 -36 22 -64 -101 -59 -202 -94 -330 -121" FillRule="evenodd"/>
+                                            </Path.Data>
+                                        </Path>
+                                    </Canvas>
+                                </Canvas>
+                            </Canvas>
+                        </Viewbox>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--CHAVE-->
+        <Style x:Key="KeyIcon" TargetType="{x:Type ContentControl}">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Viewbox Stretch="Uniform" >
+                            <Canvas Width="737.24161" Height="738.43809">
+                                <Canvas.RenderTransform>
+                                    <TranslateTransform X="0" Y="0"/>
+                                </Canvas.RenderTransform>
+                                <Canvas>
+                                    <Canvas.RenderTransform>
+                                        <TranslateTransform X="-6043.0001" Y="-15480.562"/>
+                                    </Canvas.RenderTransform>
+                                    <Path StrokeThickness="50" Stroke="#FFFFFFFF" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                        <Path.Data>
+                                            <PathGeometry Figures="m 6364 15968 96 -96 c 206 119 394 -144 237 -307 -172 -164 -419 43 -307 238 l -322 321 0 70 70 0 48 -48 78 -1 1 -78 21 -22 77 2 1 -79 z" FillRule="evenodd"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Ellipse Canvas.Left="6577" Canvas.Top="15595" Width="90" Height="90" StrokeThickness="30" Stroke="#FFFFFFFF"/>
+                                </Canvas>
+                            </Canvas>
+                        </Viewbox>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--WAVETECHLOGO-->
+        <Style x:Key="WaveTechLogo" TargetType="{x:Type ContentControl}">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Viewbox Stretch="Uniform">
+                            <Canvas Width="2529" Height="1293.5298">
+                                <Canvas.RenderTransform>
+                                    <TranslateTransform X="0" Y="0"/>
+                                </Canvas.RenderTransform>
+                                <Canvas>
+                                    <Canvas.RenderTransform>
+                                        <TranslateTransform X="-6528.0001" Y="-11453.47"/>
+                                    </Canvas.RenderTransform>
+                                    <Path Fill="#FF373435">
+                                        <Path.Data>
+                                            <PathGeometry Figures="m 6528 11732 c 21 -21 42 -45 69 -58 34 -15 71 -20 107 -10 182 50 223 376 431 346 66 -9 115 -67 152 -118 54 -78 95 -164 144 -244 45 -74 95 -155 181 -185 92 -31 178 18 240 84 37 40 66 86 96 131 56 84 111 170 173 250 83 107 215 188 345 101 105 -71 176 -179 271 -260 46 -39 98 -77 159 -87 6 -1 12 0 18 -1 6 0 13 0 19 1 11 1 23 4 34 9 10 4 21 10 30 16 10 7 20 14 29 22 10 8 19 17 28 25 1 1 2 2 3 3 -5 -3 -10 -6 -15 -8 -7 -3 -14 -5 -21 -6 -47 -10 -120 7 -192 113 -65 94 -115 198 -173 296 -42 71 -82 146 -147 198 -147 118 -287 -77 -363 -185 -57 -82 -127 -179 -227 -211 -100 -32 -189 30 -261 95 -111 100 -207 296 -384 279 -110 -10 -207 -106 -271 -190 -83 -108 -142 -233 -231 -337 -32 -37 -72 -68 -122 -78 -42 -9 -82 -8 -122 9 z" FillRule="nonzero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Canvas>
+                                        <Path Fill="#FF373435">
+                                            <Path.Data>
+                                                <PathGeometry Figures="m 7219 12629 c 0 31 15 57 45 76 13 7 27 11 43 11 32 0 57 -15 76 -45 7 -13 11 -28 11 -43 0 -32 -15 -57 -45 -76 -13 -8 -28 -11 -43 -11 -32 0 -57 15 -76 45 -7 13 -11 27 -11 43 z m 83 -118 9 0 c 29 0 57 13 83 39 l 0 -38 1 -1 27 0 1 1 0 232 -1 1 -27 0 -1 -1 0 -37 c -26 25 -54 38 -83 38 l -9 0 c -33 0 -62 -15 -88 -44 -17 -23 -25 -46 -25 -69 l 0 -8 c 0 -33 15 -62 45 -88 23 -17 46 -25 68 -25 z" FillRule="nonzero"/>
+                                            </Path.Data>
+                                        </Path>
+                                        <Path Fill="#FF373435">
+                                            <Path.Data>
+                                                <PathGeometry Figures="m 7496 12508 c 2 1 30 58 86 170 l 1 0 c 56 -113 84 -170 86 -170 l 32 0 0 1 c -77 158 -116 236 -119 236 l -118 -236 1 -1 31 0 z" FillRule="nonzero"/>
+                                            </Path.Data>
+                                        </Path>
+                                        <Path Fill="#FF373435">
+                                            <Path.Data>
+                                                <PathGeometry Figures="m 7746 12596 165 0 c -4 -16 -14 -29 -29 -41 -16 -12 -34 -18 -54 -18 -36 0 -63 18 -81 55 l -1 4 z m 79 -89 4 0 c 46 0 82 22 107 67 8 17 11 33 11 47 l 0 3 -1 2 -206 0 0 1 c 0 38 20 66 61 83 8 3 16 4 23 4 l 9 0 c 28 0 53 -15 74 -44 l 30 0 2 1 c -9 22 -22 38 -38 49 -21 17 -45 25 -73 25 -43 0 -77 -20 -104 -61 -9 -19 -14 -37 -14 -53 l 0 -12 c 0 -30 14 -59 43 -85 23 -18 47 -27 72 -27 z" FillRule="nonzero"/>
+                                            </Path.Data>
+                                        </Path>
+                                        <Path Fill="#FF373435">
+                                            <Path.Data>
+                                                <PathGeometry Figures="m 8183 12598 164 0 c -5 -16 -15 -29 -29 -40 -17 -12 -34 -18 -54 -18 -35 0 -62 18 -80 54 l -1 4 z m 79 -88 3 0 c 46 0 81 22 106 66 7 17 11 33 11 47 l 0 3 -2 2 -202 0 0 1 c 0 37 20 65 59 82 9 2 17 3 24 3 l 8 0 c 28 0 52 -14 73 -43 l 30 0 2 1 c -10 21 -22 37 -38 48 -21 17 -45 25 -72 25 -42 0 -76 -20 -102 -60 -9 -19 -14 -37 -14 -53 l 0 -11 c 0 -30 14 -58 42 -84 23 -18 47 -27 72 -27 z" FillRule="nonzero"/>
+                                            </Path.Data>
+                                        </Path>
+                                        <Path Fill="#FF373435">
+                                            <Path.Data>
+                                                <PathGeometry Figures="m 8535 12511 9 0 c 27 0 54 11 78 34 9 9 15 17 19 24 l -1 0 -35 0 c -19 -19 -41 -29 -66 -29 -31 0 -56 14 -74 42 -9 14 -13 29 -13 46 0 31 14 56 42 75 13 8 29 13 46 13 24 0 46 -10 65 -30 l 35 0 1 1 c -15 25 -36 42 -65 53 -13 3 -24 5 -32 5 l -9 0 c -27 0 -53 -11 -78 -33 -23 -25 -35 -51 -35 -80 l 0 -8 c 0 -27 11 -53 33 -78 25 -24 52 -35 80 -35 z" FillRule="nonzero"/>
+                                            </Path.Data>
+                                        </Path>
+                                        <Path Fill="#FF373435">
+                                            <Path.Data>
+                                                <PathGeometry Figures="m 8693 12280 26 0 2 2 0 268 c 26 -25 52 -38 80 -38 l 13 0 c 36 0 67 19 93 55 11 20 17 38 17 55 l 0 121 -2 2 -25 0 -2 -2 0 -110 c 0 -43 -21 -73 -63 -87 -5 -2 -13 -4 -24 -4 -38 0 -65 19 -83 58 -3 10 -4 21 -4 33 l 0 110 -2 2 -26 0 -2 -2 0 -461 2 -2 z" FillRule="nonzero"/>
+                                            </Path.Data>
+                                        </Path>
+                                        <Path Fill="#FF373435">
+                                            <Path.Data>
+                                                <PathGeometry Figures="m 6749 12396 c 2 1 75 145 138 273 l 2 0 c 43 -89 85 -174 88 -174 l 85 174 2 0 c 63 -129 136 -273 138 -273 l 36 0 c 0 2 -85 172 -174 349 l -1 0 c -1 0 -44 -84 -86 -172 -2 1 -44 84 -87 171 l -1 1 -2 0 -174 -348 1 -1 35 0 z" FillRule="nonzero"/>
+                                            </Path.Data>
+                                        </Path>
+                                        <Polygon Points="8203,12419 8199,12422 8095,12422 8095,12744 8092,12747 8070,12747 8066,12744 8066,12422 7960,12422 7956,12419 7956,12398 7960,12394 8199,12394 8203,12398" FillRule="nonzero" Fill="#FF373435"/>
+                                    </Canvas>
+                                </Canvas>
+                            </Canvas>
+                        </Viewbox>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <!--WAVEFITLOGO-->
+        <Style x:Key="WaveFitLogo" TargetType="{x:Type ContentControl}">
+            <Setter Property="IsTabStop" Value="False"/>
+            <Setter Property="ContentTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <Viewbox Stretch="Uniform">
+                            <Canvas  Width="20267.125" Height="3336.7097">
+                                <Canvas.RenderTransform>
+                                    <TranslateTransform X="0" Y="0"/>
+                                </Canvas.RenderTransform>
+                                <Canvas>
+                                    <Canvas.RenderTransform>
+                                        <TranslateTransform X="10332" Y="7463"/>
+                                    </Canvas.RenderTransform>
+                                    <Path Fill="#FF373435">
+                                        <Path.Data>
+                                            <PathGeometry Figures="m -5574 -5275 c 0 299 140 537 420 713 122 69 258 104 405 104 299 0 537 -140 713 -420 69 -123 104 -258 104 -406 0 -299 -140 -537 -420 -713 -123 -69 -258 -103 -406 -103 -299 0 -537 139 -713 420 -69 122 -103 258 -103 405 z m 781 -1104 80 0 c 280 0 540 120 781 361 l 0 -352 12 -9 257 0 10 9 0 2181 -10 10 -257 0 -12 -10 0 -352 c -241 241 -501 362 -781 362 l -80 0 c -309 0 -586 -140 -831 -421 -153 -215 -229 -428 -229 -639 l 0 -80 c 0 -309 140 -586 420 -831 216 -153 429 -229 640 -229 z" FillRule="nonzero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path Fill="#FF373435">
+                                        <Path.Data>
+                                            <PathGeometry Figures="m -2967 -6405 c 13 6 282 538 807 1596 l 9 0 c 521 -1064 790 -1596 809 -1596 l 295 0 0 9 c -720 1478 -1091 2216 -1113 2216 l -1113 -2216 10 -9 296 0 z" FillRule="nonzero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path Fill="#FF373435">
+                                        <Path.Data>
+                                            <PathGeometry Figures="m -621 -5584 1556 0 c -43 -147 -135 -274 -275 -381 -157 -113 -326 -170 -508 -170 -340 0 -594 171 -763 515 l -10 36 z m 747 -836 36 0 c 434 0 768 211 1003 632 71 158 107 307 107 445 l 0 27 -17 16 -1929 0 0 10 c 0 357 190 618 568 782 81 23 155 34 222 34 l 82 0 c 264 0 495 -139 691 -416 l 285 0 19 16 c -87 200 -206 351 -356 455 -200 160 -428 239 -685 239 -402 0 -728 -192 -976 -576 -90 -181 -134 -346 -134 -498 l 0 -108 c 0 -289 133 -555 399 -799 217 -173 446 -259 685 -259 z" FillRule="nonzero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Path Fill="#FF373435">
+                                        <Path.Data>
+                                            <PathGeometry Figures="m -9986 -7463 c 15 7 699 1366 1296 2567 l 11 0 c 405 -836 807 -1631 827 -1631 l 804 1631 22 0 c 590 -1209 1274 -2567 1296 -2567 l 335 0 c 0 21 -795 1619 -1631 3283 l -11 0 c -14 0 -412 -791 -815 -1620 -15 7 -413 796 -816 1610 l -11 10 -11 0 -1642 -3273 11 -10 335 0 z" FillRule="nonzero"/>
+                                        </Path.Data>
+                                    </Path>
+                                    <Canvas>
+                                        <Path Fill="#FF89BF9F">
+                                            <Path.Data>
+                                                <PathGeometry Figures="m 6917.9656 -7452.3218 -2687.6515 0 0 305.8708 361.0278 45.1285 0 2572.3232 -361.0278 45.1285 0 305.8708 1318.7544 0 0 -305.8708 -441.2563 -65.1856 0 -1027.9264 907.5839 0 65.1855 396.1277 310.8851 0 0 -1193.3975 -310.8851 0 -65.1855 396.1278 -907.5839 0 0 -1047.9836 1434.0828 0 70.1998 426.2134 305.8708 0 z" FillRule="evenodd"/>
+                                            </Path.Data>
+                                        </Path>
+                                        <Path Fill="#FF89BF9F">
+                                            <Path.Data>
+                                                <PathGeometry Figures="m 7691.2979 -6920.8086 c 91.0918 -0.7285 162.1273 -23.0838 213.1066 -67.066 50.9775 -43.9765 76.8846 -105.1924 77.7213 -183.6477 -0.8367 -78.4495 -26.7438 -139.6655 -77.7213 -183.648 -50.9793 -43.9762 -122.0148 -66.3314 -213.1066 -67.0658 -93.287 0.7345 -164.9493 23.0898 -214.9871 67.0659 -50.0388 43.9825 -75.3191 105.1984 -75.8409 183.6479 0.5219 78.4553 25.8022 139.6712 75.841 183.6477 50.0377 43.9821 121.7 66.3374 214.987 67.066 z m 571.6274 2436.9378 -325.9279 -45.1285 0 -2035.7957 -817.3269 0 0 305.8708 325.9279 45.1284 0 1684.7965 -325.9279 45.1285 0 305.8708 1143.2548 0 z" FillRule="evenodd"/>
+                                            </Path.Data>
+                                        </Path>
+                                        <Path Fill="#FF89BF9F">
+                                            <Path.Data>
+                                                <PathGeometry Figures="m 9864.9252 -4599.1991 c -90.2584 45.9645 -180.5153 69.3644 -270.7709 70.1998 -99.8687 0.4182 -173.4113 -25.4889 -220.6281 -77.7213 -47.2188 -52.2316 -70.6187 -133.2956 -70.1999 -243.1923 l 0 -1343.8258 496.4133 0 0 -371.0563 -496.4133 0 0 -666.8986 -386.0992 0 -80.2284 671.9128 -401.142 40.1142 0 325.9279 381.0849 0 0 1414.0257 c -1.2539 224.5981 48.8888 389.6511 150.4283 495.1597 101.5383 105.5087 261.9949 157.7407 481.3704 156.6961 93.2851 0.2088 181.2437 -8.984 263.8761 -27.5786 82.6297 -18.5947 156.7992 -47.8446 222.5086 -87.7498 z" FillRule="evenodd"/>
+                                            </Path.Data>
+                                        </Path>
+                                    </Canvas>
+                                    <Path StrokeThickness="50" Stroke="#FF000000" StrokeLineJoin="Round" StrokeStartLineCap="Round" StrokeEndLineCap="Round">
+                                        <Path.Data>
+                                            <PathGeometry Figures="m 2651 -4382 0 -2868" FillRule="evenodd"/>
+                                        </Path.Data>
+                                    </Path>
+                                </Canvas>
+                            </Canvas>
+                        </Viewbox>
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        
+    </Window.Resources>
+    
+    <Grid>
+        <!-- Column Definitions -->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="20"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Row Definitions -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="20"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="2" Background="LightGreen">
+        </Grid>
+        
+        <!-- Row 1 -->
+            <ContentControl Style="{DynamicResource WaveTechLogo}" 
+                        Grid.Row="1" Grid.Column="1" Height="50" Width="50"/>
+            <ContentControl Style="{DynamicResource WaveFitLogo}" Grid.Row="1" 
+                        Grid.Column="2" Height="50" Width="50"/>
+
+            <!-- Row 2 -->
+            <ContentControl Grid.Row="2" Grid.Column="1" Style="{StaticResource PatientIcon}" Height="20" />
+            <TextBlock Grid.Row="2" Grid.Column="2" Text="Usuário" 
+                   Style="{StaticResource TextBlockStyle}" Margin="5,5,0,0" Width="60"/>
+            <TextBox Grid.Row="2" Grid.Column="3" Style="{StaticResource TextBoxStyle}" 
+                 Text="{Binding User, UpdateSourceTrigger=PropertyChanged}" />
+
+            <!-- Row 3 -->
+            <ContentControl Style="{StaticResource KeyIcon}" Grid.Row="3" Grid.Column="1" 
+                        HorizontalAlignment="Center" VerticalAlignment="Center" Height="20" 
+                        Margin="10,0,0,5"/>
+            <TextBlock Grid.Row="3" Grid.Column="2" Text="Senha" Style="{StaticResource TextBlockStyle}"
+                   Margin="5,0,0,5" Width="60"/>
+            <PasswordBox Grid.Row="3" Grid.Column="3" x:Name="Password" 
+                     Style="{StaticResource PasswordBoxStyle}" Margin="0,0,35,5" />
+            <TextBox  Grid.Row="3" Grid.Column="3" Name="passwordTxtBox" 
+                  Style="{StaticResource TextBoxStyle}" Padding="0" Margin="0,0,35,5" Visibility="Collapsed" d:IsHidden="True" />
+     
+        
+    </Grid>
+</Window>
+
+
+           
+
+    
